@@ -3,72 +3,129 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simple Stay Motel</title>
+    <title>Simple Stay Motel | $39.99</title>
     <style>
+        :root {
+            --accent: #e63946; /* Retro Red */
+            --bg: #fdfaf5;    /* Warm Cream */
+            --dark: #1d3557;  /* Deep Navy */
+        }
+
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
-            color: #333;
+            color: var(--dark);
+            background-color: var(--bg);
             max-width: 600px;
             margin: 0 auto;
-            padding: 2rem;
+            padding: 3rem 1.5rem;
             text-align: center;
         }
+
         header {
+            border-bottom: 4px double var(--dark);
             margin-bottom: 3rem;
+            padding-bottom: 1rem;
         }
-        .price-card {
-            background: #f4f4f4;
-            border: 2px solid #000;
-            padding: 2rem;
-            border-radius: 8px;
-            margin: 2rem 0;
+
+        h1 {
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin: 0;
+            font-size: 2.5rem;
         }
-        .price {
-            font-size: 3rem;
+
+        .tagline {
+            font-style: italic;
+            color: var(--accent);
             font-weight: bold;
+            margin-top: 0.5rem;
+        }
+
+        .price-card {
+            background: white;
+            border: 3px solid var(--dark);
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 10px 10px 0px var(--dark);
+            margin: 3rem 0;
+        }
+
+        .price {
+            font-size: 4rem;
+            font-weight: 900;
+            color: var(--accent);
             display: block;
+            line-height: 1;
         }
-        .details {
-            color: #666;
-            font-size: 0.9rem;
+
+        .tax-note {
+            font-size: 1.2rem;
+            vertical-align: middle;
+            color: var(--dark);
         }
+
+        .features {
+            list-style: none;
+            padding: 0;
+            margin: 2rem 0;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            font-weight: bold;
+        }
+
         .btn {
             display: inline-block;
-            background: #000;
-            color: #fff;
-            padding: 1rem 2rem;
+            background: var(--dark);
+            color: white;
+            padding: 1.2rem 2.5rem;
             text-decoration: none;
-            border-radius: 5px;
-            margin-top: 1rem;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: transform 0.2s;
         }
+
+        .btn:hover {
+            transform: scale(1.05);
+            background: var(--accent);
+        }
+
         footer {
-            margin-top: 4rem;
-            font-size: 0.8rem;
-            color: #888;
+            margin-top: 5rem;
+            font-size: 0.9rem;
+            border-top: 1px solid #ccc;
+            padding-top: 2rem;
         }
     </style>
 </head>
 <body>
 
     <header>
-        <h1>Welcome to Simple Stay</h1>
-        <p>No fuss. Just a good night's sleep.</p>
+        <h1>Simple Stay</h1>
+        <p class="tagline">No fuss. Just a good night's sleep.</p>
     </header>
 
     <main>
         <div class="price-card">
-            <span class="details">Standard Room</span>
-            <span class="price">$39.99 <small>+ tax</small></span>
-            <p>Per Night</p>
+            <span style="text-transform: uppercase; letter-spacing: 1px;">Classic Room Rate</span>
+            <span class="price">$39.99 <span class="tax-note">+ tax</span></span>
+            <ul class="features">
+                <li>✓ Clean Sheets</li>
+                <li>✓ Hot Shower</li>
+                <li>✓ Free Wi-Fi</li>
+            </ul>
         </div>
 
-        <p>Ready to check in? Give us a call or stop by the front desk.</p>
-        <a href="mailto:hello@example.com" class="btn">Email for Availability</a>
+        <h3>Great rooms. Better prices.</h3>
+        <p>Why pay for fluff you don't use? We provide the essentials for a perfect night at the lowest rate in town.</p>
+        
+        <br>
+        <a href="mailto:hello@example.com" class="btn">Check Availability Now</a>
     </main>
 
     <footer>
-        <p>123 Highway Ave. | Open 24/7</p>
+        <p><strong>📍 123 Highway Ave.</strong><br>Open 24/7 for travelers</p>
     </footer>
 
 </body>
