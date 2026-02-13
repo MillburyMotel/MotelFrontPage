@@ -3,12 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simple Stay Motel | $39.99</title>
+    <title>Simple Stay Motel | Rooms Available Now</title>
     <style>
         :root {
             --accent: #e63946; /* Retro Red */
             --bg: #fdfaf5;    /* Warm Cream */
             --dark: #1d3557;  /* Deep Navy */
+            --status: #2b9348; /* Success Green */
         }
 
         body {
@@ -35,11 +36,16 @@
             font-size: 2.5rem;
         }
 
-        .tagline {
-            font-style: italic;
-            color: var(--accent);
+        .status-badge {
+            display: inline-block;
+            background: var(--status);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
             font-weight: bold;
-            margin-top: 0.5rem;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
         }
 
         .price-card {
@@ -48,7 +54,7 @@
             padding: 2.5rem;
             border-radius: 20px;
             box-shadow: 10px 10px 0px var(--dark);
-            margin: 3rem 0;
+            margin: 2rem 0;
         }
 
         .price {
@@ -61,18 +67,7 @@
 
         .tax-note {
             font-size: 1.2rem;
-            vertical-align: middle;
             color: var(--dark);
-        }
-
-        .features {
-            list-style: none;
-            padding: 0;
-            margin: 2rem 0;
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            font-weight: bold;
         }
 
         .btn {
@@ -83,7 +78,9 @@
             text-decoration: none;
             border-radius: 50px;
             font-weight: bold;
+            font-size: 1.2rem;
             transition: transform 0.2s;
+            margin-top: 1.5rem;
         }
 
         .btn:hover {
@@ -103,29 +100,26 @@
 
     <header>
         <h1>Simple Stay</h1>
-        <p class="tagline">No fuss. Just a good night's sleep.</p>
+        <p>No fuss. Just a good night's sleep.</p>
     </header>
 
     <main>
+        <div class="status-badge">● Rooms Available Now</div>
+        
         <div class="price-card">
-            <span style="text-transform: uppercase; letter-spacing: 1px;">Classic Room Rate</span>
+            <span style="text-transform: uppercase; letter-spacing: 1px;">Tonight's Rate</span>
             <span class="price">$39.99 <span class="tax-note">+ tax</span></span>
-            <ul class="features">
-                <li>✓ Clean Sheets</li>
-                <li>✓ Hot Shower</li>
-                <li>✓ Free Wi-Fi</li>
-            </ul>
+            <p><strong>Walk-ins Welcome.</strong><br>Check in at the front desk 24/7.</p>
         </div>
 
-        <h3>Great rooms. Better prices.</h3>
-        <p>Why pay for fluff you don't use? We provide the essentials for a perfect night at the lowest rate in town.</p>
+        <h3>Clean. Quiet. Affordable.</h3>
+        <p>We keep it simple so you save money. Stop by whenever you're ready.</p>
         
-        <br>
-        <a href="mailto:hello@example.com" class="btn">Check Availability Now</a>
+        <a href="https://www.google.com/maps" target="https://www.google.com/maps/place/Millbury+Motel/@41.5424215,-83.4635187,103m/data=!3m1!1e3!4m6!3m5!1s0x883b8f39e8235b2f:0xb989d65ef51c583e!8m2!3d41.542429!4d-83.4633548!16s%2Fg%2F11y_v9rd_p?entry=ttu&g_ep=EgoyMDI2MDIxMC4wIKXMDSoASAFQAw%3D%3D" class="btn">Get Directions to Motel</a>
     </main>
 
     <footer>
-        <p><strong>📍 123 Highway Ave.</strong><br>Open 24/7 for travelers</p>
+        <p><strong>📍 123 Highway Ave.</strong><br>Right off the main road.</p>
     </footer>
 
 </body>
