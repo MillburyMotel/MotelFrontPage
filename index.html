@@ -13,10 +13,10 @@
             --navy: #0f1f3d;
             --gold: #c9972b;
             --gold-light: #e8b84b;
-            --red: #c0392b;
             --white: #ffffff;
             --gray: #6b7280;
             --light-border: #e2d9c8;
+            --green: #28a745;
         }
 
         body {
@@ -27,7 +27,6 @@
             overflow-x: hidden;
         }
 
-        /* Noise texture overlay */
         body::before {
             content: '';
             position: fixed;
@@ -46,17 +45,11 @@
             padding: 0 1.5rem 4rem;
         }
 
-        /* ── HEADER ── */
-        header {
-            text-align: center;
-            padding: 3.5rem 0 2.5rem;
-            position: relative;
-        }
-
+        /* HEADER */
+        header { text-align: center; padding: 3.5rem 0 2.5rem; }
         .logo-mark {
             display: inline-block;
-            width: 56px;
-            height: 56px;
+            width: 56px; height: 56px;
             background: var(--navy);
             border-radius: 50%;
             margin-bottom: 1rem;
@@ -66,13 +59,11 @@
         .logo-mark::after {
             content: '★';
             position: absolute;
-            top: 50%;
-            left: 50%;
+            top: 50%; left: 50%;
             transform: translate(-50%, -50%);
             color: var(--gold);
             font-size: 1.4rem;
         }
-
         h1 {
             font-family: 'Playfair Display', serif;
             font-size: clamp(2.8rem, 8vw, 4rem);
@@ -81,7 +72,6 @@
             line-height: 1;
             animation: fadeDown 0.6s 0.1s ease both;
         }
-
         .tagline {
             font-size: 0.95rem;
             letter-spacing: 0.2em;
@@ -91,354 +81,382 @@
             font-weight: 500;
             animation: fadeDown 0.6s 0.2s ease both;
         }
-
         .divider {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin: 2rem 0;
+            display: flex; align-items: center; gap: 1rem; margin: 2rem 0;
         }
-        .divider::before, .divider::after {
-            content: '';
-            flex: 1;
-            height: 1px;
-            background: var(--light-border);
-        }
-        .divider span {
-            color: var(--gold);
-            font-size: 1.1rem;
-        }
+        .divider::before, .divider::after { content: ''; flex: 1; height: 1px; background: var(--light-border); }
+        .divider span { color: var(--gold); font-size: 1.1rem; }
 
-        /* ── AVAILABILITY BADGE ── */
-        .badge-wrap {
-            text-align: center;
-            margin-bottom: 2rem;
-            animation: fadeDown 0.6s 0.3s ease both;
-        }
+        /* BADGE */
+        .badge-wrap { text-align: center; margin-bottom: 2rem; animation: fadeDown 0.6s 0.3s ease both; }
         .status-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            background: #d4edda;
-            color: #155724;
-            border: 1px solid #b8dfc5;
-            padding: 0.45rem 1.2rem;
-            border-radius: 50px;
-            font-size: 0.82rem;
-            font-weight: 600;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            background: #d4edda; color: #155724; border: 1px solid #b8dfc5;
+            padding: 0.45rem 1.2rem; border-radius: 50px;
+            font-size: 0.82rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
         }
-        .dot {
-            width: 8px;
-            height: 8px;
-            background: #28a745;
-            border-radius: 50%;
-            animation: pulse 2s infinite;
-        }
+        .dot { width: 8px; height: 8px; background: var(--green); border-radius: 50%; animation: pulse 2s infinite; }
         @keyframes pulse {
             0%, 100% { opacity: 1; transform: scale(1); }
             50% { opacity: 0.5; transform: scale(0.8); }
         }
 
-        /* ── RATE CARDS ── */
-        .rates-grid {
-            display: grid;
-            gap: 1.2rem;
-            animation: fadeUp 0.7s 0.4s ease both;
-        }
-
+        /* RATE CARDS */
+        .rates-grid { display: grid; gap: 1.2rem; animation: fadeUp 0.7s 0.4s ease both; }
         .rate-card {
             background: var(--white);
             border: 1px solid var(--light-border);
             border-radius: 16px;
             padding: 1.8rem 2rem;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
+            display: flex; align-items: center; justify-content: space-between;
             box-shadow: 0 2px 12px rgba(15,31,61,0.06);
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-            position: relative;
-            overflow: hidden;
+            position: relative; overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
         }
-
         .rate-card::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            bottom: 0;
-            width: 4px;
-            background: var(--gold);
-            border-radius: 4px 0 0 4px;
+            content: ''; position: absolute; left: 0; top: 0; bottom: 0;
+            width: 4px; background: var(--gold); border-radius: 4px 0 0 4px;
         }
-
-        .rate-card.featured::before {
-            background: linear-gradient(180deg, var(--gold-light), var(--gold));
+        .rate-card.featured { border-color: var(--gold); box-shadow: 0 4px 24px rgba(201,151,43,0.15); }
+        .rate-card:hover { transform: translateY(-3px); box-shadow: 0 10px 32px rgba(15,31,61,0.13); border-color: var(--gold); }
+        .select-hint {
+            position: absolute; bottom: 0.85rem; right: 1.1rem;
+            font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em;
+            text-transform: uppercase; color: var(--gold);
+            opacity: 0; transition: opacity 0.2s;
         }
-
-        .rate-card.featured {
-            border-color: var(--gold);
-            box-shadow: 0 4px 24px rgba(201,151,43,0.15);
-        }
-
-        .rate-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 28px rgba(15,31,61,0.10);
-        }
-
-        .rate-left {}
-        .rate-label {
-            font-size: 0.78rem;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            color: var(--gray);
-            font-weight: 600;
-            margin-bottom: 0.3rem;
-        }
-        .rate-name {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: var(--navy);
-        }
-        .rate-sub {
-            font-size: 0.83rem;
-            color: var(--gray);
-            margin-top: 0.2rem;
-        }
-
-        .rate-right {
-            text-align: right;
-        }
-        .rate-amount {
-            font-family: 'Playfair Display', serif;
-            font-size: 2.3rem;
-            font-weight: 900;
-            color: var(--navy);
-            line-height: 1;
-        }
-        .rate-amount sup {
-            font-size: 1.1rem;
-            font-weight: 700;
-            vertical-align: super;
-        }
-        .rate-tax {
-            font-size: 0.78rem;
-            color: var(--gray);
-            margin-top: 0.2rem;
-            font-weight: 500;
-        }
-
+        .rate-card:hover .select-hint { opacity: 1; }
+        .rate-label { font-size: 0.78rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gray); font-weight: 600; margin-bottom: 0.3rem; }
+        .rate-name { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 700; }
+        .rate-sub { font-size: 0.83rem; color: var(--gray); margin-top: 0.2rem; }
+        .rate-right { text-align: right; }
+        .rate-amount { font-family: 'Playfair Display', serif; font-size: 2.3rem; font-weight: 900; line-height: 1; }
+        .rate-amount sup { font-size: 1.1rem; font-weight: 700; vertical-align: super; }
+        .rate-tax { font-size: 0.78rem; color: var(--gray); margin-top: 0.2rem; font-weight: 500; }
         .best-value-badge {
-            position: absolute;
-            top: 0.9rem;
-            right: 1rem;
-            background: var(--gold);
-            color: white;
-            font-size: 0.68rem;
-            font-weight: 700;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            padding: 0.2rem 0.7rem;
-            border-radius: 50px;
+            position: absolute; top: 0.9rem; right: 1rem;
+            background: var(--gold); color: white;
+            font-size: 0.68rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+            padding: 0.2rem 0.7rem; border-radius: 50px;
         }
 
-        /* ── INFO SECTION ── */
+        /* INFO STRIP */
         .info-strip {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            gap: 1px;
-            background: var(--light-border);
-            border: 1px solid var(--light-border);
-            border-radius: 14px;
-            overflow: hidden;
-            margin: 2rem 0;
-            animation: fadeUp 0.7s 0.5s ease both;
+            display: grid; grid-template-columns: 1fr 1fr 1fr;
+            gap: 1px; background: var(--light-border);
+            border: 1px solid var(--light-border); border-radius: 14px; overflow: hidden;
+            margin: 2rem 0; animation: fadeUp 0.7s 0.5s ease both;
         }
-        .info-item {
-            background: var(--white);
-            padding: 1.2rem 1rem;
-            text-align: center;
-        }
-        .info-icon {
-            font-size: 1.4rem;
-            margin-bottom: 0.3rem;
-        }
-        .info-title {
-            font-size: 0.72rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: var(--gray);
-            font-weight: 600;
-        }
-        .info-value {
-            font-size: 0.88rem;
-            font-weight: 600;
-            color: var(--navy);
-            margin-top: 0.1rem;
-        }
+        .info-item { background: var(--white); padding: 1.2rem 1rem; text-align: center; }
+        .info-icon { font-size: 1.4rem; margin-bottom: 0.3rem; }
+        .info-title { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gray); font-weight: 600; }
+        .info-value { font-size: 0.88rem; font-weight: 600; color: var(--navy); margin-top: 0.1rem; }
 
-        /* ── CTA ── */
-        .cta-wrap {
-            text-align: center;
-            animation: fadeUp 0.7s 0.6s ease both;
-        }
-
+        /* CTA */
+        .cta-wrap { text-align: center; animation: fadeUp 0.7s 0.6s ease both; }
         .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.6rem;
-            background: var(--navy);
-            color: white;
-            padding: 1rem 2.2rem;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: 600;
-            font-size: 1rem;
-            letter-spacing: 0.02em;
-            transition: all 0.25s ease;
-            box-shadow: 0 4px 16px rgba(15,31,61,0.25);
+            display: inline-flex; align-items: center; gap: 0.6rem;
+            background: var(--navy); color: white;
+            padding: 1rem 2.2rem; text-decoration: none; border-radius: 50px;
+            font-weight: 600; font-size: 1rem;
+            transition: all 0.25s ease; box-shadow: 0 4px 16px rgba(15,31,61,0.25);
         }
-        .btn:hover {
-            background: var(--gold);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(201,151,43,0.35);
-        }
-        .btn svg {
-            width: 18px;
-            height: 18px;
-            fill: currentColor;
-        }
+        .btn:hover { background: var(--gold); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(201,151,43,0.35); }
+        .btn svg { width: 18px; height: 18px; fill: currentColor; }
+        .cta-note { margin-top: 1rem; font-size: 0.82rem; color: var(--gray); }
 
-        .cta-note {
-            margin-top: 1rem;
-            font-size: 0.82rem;
-            color: var(--gray);
-        }
+        /* FOOTER */
+        footer { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--light-border); text-align: center; animation: fadeUp 0.7s 0.7s ease both; }
+        .footer-address { font-size: 0.9rem; color: var(--gray); line-height: 1.8; }
+        .footer-address strong { color: var(--navy); font-weight: 600; }
 
-        /* ── FOOTER ── */
-        footer {
-            margin-top: 3rem;
-            padding-top: 2rem;
-            border-top: 1px solid var(--light-border);
-            text-align: center;
-            animation: fadeUp 0.7s 0.7s ease both;
+        /* MODAL */
+        .modal-overlay {
+            display: none; position: fixed; inset: 0;
+            background: rgba(15,31,61,0.55);
+            backdrop-filter: blur(4px);
+            z-index: 100; align-items: center; justify-content: center; padding: 1.5rem;
         }
-        .footer-address {
-            font-size: 0.9rem;
-            color: var(--gray);
-            line-height: 1.8;
+        .modal-overlay.open { display: flex; }
+        .modal {
+            background: var(--white); border-radius: 24px;
+            padding: 2.5rem 2rem; width: 100%; max-width: 440px;
+            box-shadow: 0 24px 64px rgba(15,31,61,0.22);
+            position: relative;
+            animation: modalIn 0.35s cubic-bezier(0.34,1.56,0.64,1) both;
         }
-        .footer-address strong {
-            color: var(--navy);
-            font-weight: 600;
+        @keyframes modalIn {
+            from { opacity: 0; transform: scale(0.88) translateY(20px); }
+            to   { opacity: 1; transform: scale(1) translateY(0); }
         }
+        .modal-close {
+            position: absolute; top: 1.1rem; right: 1.2rem;
+            background: none; border: none; font-size: 1.5rem;
+            cursor: pointer; color: var(--gray); line-height: 1; transition: color 0.15s;
+        }
+        .modal-close:hover { color: var(--navy); }
 
-        /* ── ANIMATIONS ── */
-        @keyframes fadeDown {
-            from { opacity: 0; transform: translateY(-16px); }
-            to   { opacity: 1; transform: translateY(0); }
+        .modal-rate-chip {
+            display: inline-block;
+            background: var(--cream); border: 1px solid var(--light-border);
+            color: var(--navy); font-size: 0.78rem; font-weight: 700;
+            letter-spacing: 0.08em; text-transform: uppercase;
+            padding: 0.3rem 0.9rem; border-radius: 50px; margin-bottom: 1rem;
         }
-        @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(16px); }
-            to   { opacity: 1; transform: translateY(0); }
+        .modal h2 { font-family: 'Playfair Display', serif; font-size: 1.7rem; font-weight: 700; margin-bottom: 0.35rem; }
+        .modal-sub { font-size: 0.88rem; color: var(--gray); margin-bottom: 1.6rem; }
+
+        .form-group { margin-bottom: 1.1rem; }
+        .form-group label {
+            display: block; font-size: 0.78rem; font-weight: 600;
+            letter-spacing: 0.06em; text-transform: uppercase; color: var(--gray); margin-bottom: 0.4rem;
         }
+        .form-group input {
+            width: 100%; padding: 0.85rem 1rem;
+            border: 1.5px solid var(--light-border); border-radius: 10px;
+            font-size: 1rem; font-family: 'DM Sans', sans-serif;
+            color: var(--navy); background: var(--cream);
+            outline: none; transition: border-color 0.2s, box-shadow 0.2s;
+        }
+        .form-group input:focus { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(201,151,43,0.15); }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+        .btn-submit {
+            width: 100%; margin-top: 0.5rem; padding: 1rem;
+            background: var(--navy); color: white; border: none; border-radius: 50px;
+            font-size: 1rem; font-weight: 700; font-family: 'DM Sans', sans-serif;
+            cursor: pointer; transition: all 0.25s ease;
+            box-shadow: 0 4px 16px rgba(15,31,61,0.2);
+        }
+        .btn-submit:hover { background: var(--gold); transform: translateY(-1px); box-shadow: 0 8px 24px rgba(201,151,43,0.3); }
+
+        /* CONFIRMATION */
+        .confirm-screen { display: none; text-align: center; padding: 0.5rem 0; }
+        .confirm-screen.show { display: block; }
+        .form-section.hide { display: none; }
+
+        .check-circle {
+            width: 72px; height: 72px; background: #d4edda; border-radius: 50%;
+            margin: 0 auto 1.2rem;
+            display: flex; align-items: center; justify-content: center;
+            animation: popIn 0.5s cubic-bezier(0.34,1.56,0.64,1) both;
+        }
+        @keyframes popIn {
+            from { transform: scale(0); opacity: 0; }
+            to   { transform: scale(1); opacity: 1; }
+        }
+        .check-circle svg { width: 36px; height: 36px; }
+        .confirm-title { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 900; margin-bottom: 0.5rem; }
+        .confirm-sub { font-size: 0.93rem; color: var(--gray); line-height: 1.6; margin-bottom: 1.5rem; }
+        .confirm-details {
+            background: var(--cream); border: 1px solid var(--light-border);
+            border-radius: 12px; padding: 1rem 1.2rem; margin-bottom: 1.5rem; text-align: left;
+        }
+        .cd-row { display: flex; justify-content: space-between; font-size: 0.88rem; padding: 0.3rem 0; }
+        .cd-row span:first-child { color: var(--gray); }
+        .cd-row span:last-child { font-weight: 600; color: var(--navy); }
+        .btn-done {
+            display: inline-block; padding: 0.85rem 2rem;
+            background: var(--navy); color: white; border: none; border-radius: 50px;
+            font-size: 0.95rem; font-weight: 700; font-family: 'DM Sans', sans-serif;
+            cursor: pointer; transition: all 0.2s;
+        }
+        .btn-done:hover { background: var(--gold); transform: translateY(-1px); }
+
+        /* ANIMATIONS */
+        @keyframes fadeDown { from { opacity: 0; transform: translateY(-16px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeUp   { from { opacity: 0; transform: translateY(16px);  } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body>
-    <div class="wrapper">
 
-        <header>
-            <div class="logo-mark"></div>
-            <h1>Simple Stay</h1>
-            <p class="tagline">Clean · Quiet · Affordable</p>
-        </header>
+<div class="wrapper">
+    <header>
+        <div class="logo-mark"></div>
+        <h1>Simple Stay</h1>
+        <p class="tagline">Clean · Quiet · Affordable</p>
+    </header>
 
-        <div class="divider"><span>✦</span></div>
+    <div class="divider"><span>✦</span></div>
 
-        <div class="badge-wrap">
-            <span class="status-badge"><span class="dot"></span>Rooms Available Now — Walk-ins Welcome</span>
+    <div class="badge-wrap">
+        <span class="status-badge"><span class="dot"></span>Rooms Available Now — Walk-ins Welcome</span>
+    </div>
+
+    <div class="rates-grid">
+
+        <div class="rate-card featured" onclick="openModal('Nightly', '$39.99 + tax')">
+            <div class="rate-left">
+                <div class="rate-label">Per Night</div>
+                <div class="rate-name">Nightly Rate</div>
+                <div class="rate-sub">Check in at the front desk, 24/7</div>
+            </div>
+            <div class="rate-right">
+                <div class="rate-amount"><sup>$</sup>39.99</div>
+                <div class="rate-tax">+ applicable tax</div>
+            </div>
+            <span class="select-hint">Tap to Reserve →</span>
         </div>
 
-        <div class="rates-grid">
-
-            <!-- Nightly -->
-            <div class="rate-card featured">
-                <div class="rate-left">
-                    <div class="rate-label">Per Night</div>
-                    <div class="rate-name">Nightly Rate</div>
-                    <div class="rate-sub">Check in at the front desk, 24/7</div>
-                </div>
-                <div class="rate-right">
-                    <div class="rate-amount"><sup>$</sup>39.99</div>
-                    <div class="rate-tax">+ applicable tax</div>
-                </div>
+        <div class="rate-card" onclick="openModal('Weekly', '$280 + tax')">
+            <div class="rate-left">
+                <div class="rate-label">Per Week</div>
+                <div class="rate-name">Weekly Rate</div>
+                <div class="rate-sub">7 consecutive nights</div>
             </div>
-
-            <!-- Weekly -->
-            <div class="rate-card">
-                <div class="rate-left">
-                    <div class="rate-label">Per Week</div>
-                    <div class="rate-name">Weekly Rate</div>
-                    <div class="rate-sub">7 consecutive nights</div>
-                </div>
-                <div class="rate-right">
-                    <div class="rate-amount"><sup>$</sup>280</div>
-                    <div class="rate-tax">+ applicable tax</div>
-                </div>
+            <div class="rate-right">
+                <div class="rate-amount"><sup>$</sup>280</div>
+                <div class="rate-tax">+ applicable tax</div>
             </div>
-
-            <!-- Monthly -->
-            <div class="rate-card">
-                <span class="best-value-badge">Best Value</span>
-                <div class="rate-left">
-                    <div class="rate-label">Per Month</div>
-                    <div class="rate-name">Monthly Rate</div>
-                    <div class="rate-sub">Extended stay pricing</div>
-                </div>
-                <div class="rate-right">
-                    <div class="rate-amount"><sup>$</sup>999</div>
-                    <div class="rate-tax">+ applicable tax</div>
-                </div>
-            </div>
-
+            <span class="select-hint">Tap to Reserve →</span>
         </div>
 
-        <div class="info-strip">
-            <div class="info-item">
-                <div class="info-icon">🕐</div>
-                <div class="info-title">Check-In</div>
-                <div class="info-value">24 / 7</div>
+        <div class="rate-card" onclick="openModal('Monthly', '$999 + tax')">
+            <span class="best-value-badge">Best Value</span>
+            <div class="rate-left">
+                <div class="rate-label">Per Month</div>
+                <div class="rate-name">Monthly Rate</div>
+                <div class="rate-sub">Extended stay pricing</div>
             </div>
-            <div class="info-item">
-                <div class="info-icon">🧹</div>
-                <div class="info-title">Rooms</div>
-                <div class="info-value">Clean & Ready</div>
+            <div class="rate-right">
+                <div class="rate-amount"><sup>$</sup>999</div>
+                <div class="rate-tax">+ applicable tax</div>
             </div>
-            <div class="info-item">
-                <div class="info-icon">🚪</div>
-                <div class="info-title">Walk-Ins</div>
-                <div class="info-value">Always Welcome</div>
-            </div>
+            <span class="select-hint">Tap to Reserve →</span>
         </div>
-
-        <div class="cta-wrap">
-            <a href="https://www.google.com/maps/place/Millbury+Motel/@41.5424215,-83.4635187,103m/data=!3m1!1e3!4m6!3m5!1s0x883b8f39e8235b2f:0xb989d65ef51c583e!8m2!3d41.542429!4d-83.4633548!16s%2Fg%2F11y_v9rd_p?entry=ttu&g_ep=EgoyMDI2MDIxMC4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="btn">
-                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
-                Get Directions to Motel
-            </a>
-            <p class="cta-note">📍 Right off the Highway — Next to Love's</p>
-        </div>
-
-        <footer>
-            <p class="footer-address">
-                <strong>Simple Stay Motel</strong><br>
-                3491 Latcha Rd., Millbury, OH<br>
-                No reservation needed — stop by anytime.
-            </p>
-        </footer>
 
     </div>
+
+    <div class="info-strip">
+        <div class="info-item">
+            <div class="info-icon">🕐</div>
+            <div class="info-title">Check-In</div>
+            <div class="info-value">24 / 7</div>
+        </div>
+        <div class="info-item">
+            <div class="info-icon">🧹</div>
+            <div class="info-title">Rooms</div>
+            <div class="info-value">Clean & Ready</div>
+        </div>
+        <div class="info-item">
+            <div class="info-icon">🚪</div>
+            <div class="info-title">Walk-Ins</div>
+            <div class="info-value">Always Welcome</div>
+        </div>
+    </div>
+
+    <div class="cta-wrap">
+        <a href="https://www.google.com/maps/place/Millbury+Motel/@41.5424215,-83.4635187,103m/data=!3m1!1e3!4m6!3m5!1s0x883b8f39e8235b2f:0xb989d65ef51c583e!8m2!3d41.542429!4d-83.4633548!16s%2Fg%2F11y_v9rd_p?entry=ttu&g_ep=EgoyMDI2MDIxMC4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="btn">
+            <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            Get Directions to Motel
+        </a>
+        <p class="cta-note">📍 Right off the Highway — Next to Love's</p>
+    </div>
+
+    <footer>
+        <p class="footer-address">
+            <strong>Simple Stay Motel</strong><br>
+            3491 Latcha Rd., Millbury, OH<br>
+            No reservation needed — stop by anytime.
+        </p>
+    </footer>
+</div>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modalOverlay" onclick="handleOverlayClick(event)">
+    <div class="modal">
+        <button class="modal-close" onclick="closeModal()">✕</button>
+
+        <!-- FORM -->
+        <div class="form-section" id="formSection">
+            <div class="modal-rate-chip" id="rateChip"></div>
+            <h2>Reserve Your Room</h2>
+            <p class="modal-sub">Just a few quick details and you're set. Show up at the front desk whenever you're ready.</p>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>First Name</label>
+                    <input type="text" id="firstName" placeholder="John" autocomplete="given-name">
+                </div>
+                <div class="form-group">
+                    <label>Last Name</label>
+                    <input type="text" id="lastName" placeholder="Smith" autocomplete="family-name">
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Phone Number</label>
+                <input type="tel" id="phone" placeholder="(419) 555-0123" autocomplete="tel">
+            </div>
+
+            <button class="btn-submit" onclick="submitForm()">Confirm Reservation</button>
+        </div>
+
+        <!-- CONFIRMATION -->
+        <div class="confirm-screen" id="confirmScreen">
+            <div class="check-circle">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#28a745" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12"/>
+                </svg>
+            </div>
+            <div class="confirm-title">You're All Set!</div>
+            <p class="confirm-sub">Your reservation is noted. Just walk in and check in at the front desk — we'll be expecting you.</p>
+
+            <div class="confirm-details">
+                <div class="cd-row"><span>Name</span><span id="confirmName">—</span></div>
+                <div class="cd-row"><span>Rate</span><span id="confirmRate">—</span></div>
+                <div class="cd-row"><span>Check-In</span><span>Walk-in · 24/7</span></div>
+                <div class="cd-row"><span>Address</span><span>3491 Latcha Rd.</span></div>
+            </div>
+
+            <button class="btn-done" onclick="closeModal()">Done</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    let selectedRate = '';
+    let selectedPrice = '';
+
+    function openModal(rate, price) {
+        selectedRate = rate;
+        selectedPrice = price;
+        document.getElementById('rateChip').textContent = rate + ' Rate — ' + price;
+        document.getElementById('formSection').classList.remove('hide');
+        document.getElementById('confirmScreen').classList.remove('show');
+        document.getElementById('firstName').value = '';
+        document.getElementById('lastName').value = '';
+        document.getElementById('phone').value = '';
+        document.getElementById('modalOverlay').classList.add('open');
+        document.body.style.overflow = 'hidden';
+        setTimeout(() => document.getElementById('firstName').focus(), 350);
+    }
+
+    function closeModal() {
+        document.getElementById('modalOverlay').classList.remove('open');
+        document.body.style.overflow = '';
+    }
+
+    function handleOverlayClick(e) {
+        if (e.target === document.getElementById('modalOverlay')) closeModal();
+    }
+
+    function submitForm() {
+        const first = document.getElementById('firstName').value.trim();
+        const last  = document.getElementById('lastName').value.trim();
+        if (!first || !last) {
+            document.getElementById('firstName').style.borderColor = first ? '' : '#e63946';
+            document.getElementById('lastName').style.borderColor  = last  ? '' : '#e63946';
+            return;
+        }
+        document.getElementById('confirmName').textContent = first + ' ' + last;
+        document.getElementById('confirmRate').textContent = selectedRate + ' — ' + selectedPrice;
+        document.getElementById('formSection').classList.add('hide');
+        document.getElementById('confirmScreen').classList.add('show');
+    }
+
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+</script>
+
 </body>
 </html>
