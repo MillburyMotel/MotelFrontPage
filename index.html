@@ -17,6 +17,8 @@
             --gray: #6b7280;
             --light-border: #e2d9c8;
             --green: #28a745;
+            --king-accent: #c9972b;
+            --double-accent: #2c6e8a;
         }
 
         body {
@@ -29,131 +31,190 @@
 
         body::before {
             content: '';
-            position: fixed;
-            inset: 0;
+            position: fixed; inset: 0;
             background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-            pointer-events: none;
-            z-index: 0;
-            opacity: 0.5;
+            pointer-events: none; z-index: 0; opacity: 0.5;
         }
 
         .wrapper {
-            position: relative;
-            z-index: 1;
-            max-width: 680px;
-            margin: 0 auto;
-            padding: 0 1.5rem 4rem;
+            position: relative; z-index: 1;
+            max-width: 720px; margin: 0 auto; padding: 0 1.5rem 4rem;
         }
 
-        /* HEADER */
-        header { text-align: center; padding: 3.5rem 0 2.5rem; }
+        /* ── HEADER ── */
+        header { text-align: center; padding: 3.5rem 0 2rem; }
         .logo-mark {
-            display: inline-block;
-            width: 56px; height: 56px;
-            background: var(--navy);
-            border-radius: 50%;
-            margin-bottom: 1rem;
-            position: relative;
-            animation: fadeDown 0.6s ease both;
+            display: inline-block; width: 56px; height: 56px;
+            background: var(--navy); border-radius: 50%; margin-bottom: 1rem;
+            position: relative; animation: fadeDown 0.6s ease both;
         }
         .logo-mark::after {
-            content: '★';
-            position: absolute;
-            top: 50%; left: 50%;
-            transform: translate(-50%, -50%);
-            color: var(--gold);
-            font-size: 1.4rem;
+            content: '★'; position: absolute; top: 50%; left: 50%;
+            transform: translate(-50%, -50%); color: var(--gold); font-size: 1.4rem;
         }
         h1 {
             font-family: 'Playfair Display', serif;
-            font-size: clamp(2.8rem, 8vw, 4rem);
-            font-weight: 900;
-            letter-spacing: -1px;
-            line-height: 1;
+            font-size: clamp(2.6rem, 8vw, 3.8rem);
+            font-weight: 900; letter-spacing: -1px; line-height: 1;
             animation: fadeDown 0.6s 0.1s ease both;
         }
         .tagline {
-            font-size: 0.95rem;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            color: var(--gray);
-            margin-top: 0.6rem;
-            font-weight: 500;
+            font-size: 0.9rem; letter-spacing: 0.2em; text-transform: uppercase;
+            color: var(--gray); margin-top: 0.6rem; font-weight: 500;
             animation: fadeDown 0.6s 0.2s ease both;
         }
         .divider {
-            display: flex; align-items: center; gap: 1rem; margin: 2rem 0;
+            display: flex; align-items: center; gap: 1rem; margin: 1.8rem 0;
         }
         .divider::before, .divider::after { content: ''; flex: 1; height: 1px; background: var(--light-border); }
-        .divider span { color: var(--gold); font-size: 1.1rem; }
+        .divider span { color: var(--gold); font-size: 1rem; }
 
-        /* BADGE */
+        /* ── BADGE ── */
         .badge-wrap { text-align: center; margin-bottom: 2rem; animation: fadeDown 0.6s 0.3s ease both; }
         .status-badge {
             display: inline-flex; align-items: center; gap: 0.5rem;
             background: #d4edda; color: #155724; border: 1px solid #b8dfc5;
             padding: 0.45rem 1.2rem; border-radius: 50px;
-            font-size: 0.82rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+            font-size: 0.8rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
         }
         .dot { width: 8px; height: 8px; background: var(--green); border-radius: 50%; animation: pulse 2s infinite; }
-        @keyframes pulse {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.5; transform: scale(0.8); }
+        @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(.8)} }
+
+        /* ── ROOM TYPE TABS ── */
+        .room-tabs {
+            display: grid; grid-template-columns: 1fr 1fr;
+            gap: 0; background: var(--white);
+            border: 1.5px solid var(--light-border);
+            border-radius: 16px; overflow: hidden;
+            margin-bottom: 1.8rem;
+            box-shadow: 0 2px 12px rgba(15,31,61,0.06);
+            animation: fadeUp 0.7s 0.35s ease both;
+        }
+        .tab-btn {
+            padding: 1.1rem 1.5rem;
+            background: none; border: none; cursor: pointer;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.95rem; font-weight: 600;
+            color: var(--gray);
+            display: flex; align-items: center; justify-content: center; gap: 0.6rem;
+            transition: all 0.25s ease;
+            position: relative;
+        }
+        .tab-btn + .tab-btn { border-left: 1.5px solid var(--light-border); }
+
+        .tab-btn.active-king {
+            background: var(--navy); color: var(--gold);
+        }
+        .tab-btn.active-double {
+            background: var(--double-accent); color: white;
+        }
+        .tab-btn .bed-icon { font-size: 1.2rem; }
+        .tab-btn .tab-label { line-height: 1.2; text-align: left; }
+        .tab-btn .tab-label small {
+            display: block; font-size: 0.7rem; font-weight: 400;
+            opacity: 0.75; letter-spacing: 0.04em;
         }
 
-        /* RATE CARDS */
-        .rates-grid { display: grid; gap: 1.2rem; animation: fadeUp 0.7s 0.4s ease both; }
+        /* ── ROOM PANELS ── */
+        .room-panel { display: none; animation: fadeUp 0.4s ease both; }
+        .room-panel.active { display: block; }
+
+        /* ── ROOM HEADER STRIP ── */
+        .room-header {
+            border-radius: 14px; padding: 1.2rem 1.5rem;
+            margin-bottom: 1.2rem;
+            display: flex; align-items: center; justify-content: space-between;
+        }
+        .room-header.king-header { background: linear-gradient(135deg, var(--navy) 0%, #1a3566 100%); color: white; }
+        .room-header.double-header { background: linear-gradient(135deg, var(--double-accent) 0%, #1e4f68 100%); color: white; }
+        .room-header-left {}
+        .room-type-label {
+            font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase;
+            opacity: 0.7; font-weight: 600; margin-bottom: 0.2rem;
+        }
+        .room-type-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem; font-weight: 700;
+        }
+        .room-type-desc { font-size: 0.82rem; opacity: 0.75; margin-top: 0.2rem; }
+        .room-icon-big { font-size: 2.8rem; opacity: 0.9; }
+
+        /* ── RATE CARDS ── */
+        .rates-grid { display: grid; gap: 1rem; }
         .rate-card {
             background: var(--white);
             border: 1px solid var(--light-border);
-            border-radius: 16px;
-            padding: 1.8rem 2rem;
+            border-radius: 14px;
+            padding: 1.5rem 1.6rem;
             display: flex; align-items: center; justify-content: space-between;
-            box-shadow: 0 2px 12px rgba(15,31,61,0.06);
+            box-shadow: 0 2px 10px rgba(15,31,61,0.05);
             position: relative; overflow: hidden;
             cursor: pointer;
             transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
         }
         .rate-card::before {
             content: ''; position: absolute; left: 0; top: 0; bottom: 0;
-            width: 4px; background: var(--gold); border-radius: 4px 0 0 4px;
+            width: 4px; border-radius: 4px 0 0 4px;
         }
-        .rate-card.featured { border-color: var(--gold); box-shadow: 0 4px 24px rgba(201,151,43,0.15); }
-        .rate-card:hover { transform: translateY(-3px); box-shadow: 0 10px 32px rgba(15,31,61,0.13); border-color: var(--gold); }
-        .select-hint {
-            position: absolute; bottom: 0.85rem; right: 1.1rem;
-            font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em;
-            text-transform: uppercase; color: var(--gold);
-            opacity: 0; transition: opacity 0.2s;
-        }
-        .rate-card:hover .select-hint { opacity: 1; }
-        .rate-label { font-size: 0.78rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gray); font-weight: 600; margin-bottom: 0.3rem; }
-        .rate-name { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 700; }
-        .rate-sub { font-size: 0.83rem; color: var(--gray); margin-top: 0.2rem; }
-        .rate-right { text-align: right; }
-        .rate-amount { font-family: 'Playfair Display', serif; font-size: 2.3rem; font-weight: 900; line-height: 1; }
-        .rate-amount sup { font-size: 1.1rem; font-weight: 700; vertical-align: super; }
-        .rate-tax { font-size: 0.78rem; color: var(--gray); margin-top: 0.2rem; font-weight: 500; }
-        .best-value-badge {
-            position: absolute; top: 0.9rem; right: 1rem;
-            background: var(--gold); color: white;
-            font-size: 0.68rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
-            padding: 0.2rem 0.7rem; border-radius: 50px;
-        }
+        .king-panel .rate-card::before { background: var(--gold); }
+        .double-panel .rate-card::before { background: var(--double-accent); }
 
-        /* INFO STRIP */
+        .king-panel .rate-card:hover { border-color: var(--gold); transform: translateY(-2px); box-shadow: 0 8px 28px rgba(201,151,43,0.13); }
+        .double-panel .rate-card:hover { border-color: var(--double-accent); transform: translateY(-2px); box-shadow: 0 8px 28px rgba(44,110,138,0.13); }
+
+        .select-hint {
+            position: absolute; bottom: 0.7rem; right: 1rem;
+            font-size: 0.68rem; font-weight: 700; letter-spacing: 0.08em;
+            text-transform: uppercase; opacity: 0; transition: opacity 0.2s;
+        }
+        .king-panel .select-hint { color: var(--gold); }
+        .double-panel .select-hint { color: var(--double-accent); }
+        .rate-card:hover .select-hint { opacity: 1; }
+
+        .rate-left {}
+        .rate-period {
+            font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase;
+            font-weight: 700; margin-bottom: 0.2rem;
+        }
+        .king-panel .rate-period { color: var(--gold); }
+        .double-panel .rate-period { color: var(--double-accent); }
+        .rate-name { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 700; color: var(--navy); }
+        .rate-sub { font-size: 0.8rem; color: var(--gray); margin-top: 0.15rem; }
+
+        .rate-right { text-align: right; flex-shrink: 0; padding-left: 1rem; }
+        .rate-amount { font-family: 'Playfair Display', serif; font-size: 2.1rem; font-weight: 900; color: var(--navy); line-height: 1; }
+        .rate-amount sup { font-size: 1rem; font-weight: 700; vertical-align: super; }
+        .rate-tax { font-size: 0.74rem; color: var(--gray); margin-top: 0.15rem; }
+
+        .best-value-badge {
+            position: absolute; top: 0.75rem; right: 0.9rem;
+            font-size: 0.63rem; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase;
+            padding: 0.18rem 0.6rem; border-radius: 50px; color: white;
+        }
+        .king-panel .best-value-badge { background: var(--gold); }
+        .double-panel .best-value-badge { background: var(--double-accent); }
+
+        /* ── COMPARE NOTE ── */
+        .compare-note {
+            text-align: center; margin: 1.8rem 0 0;
+            font-size: 0.82rem; color: var(--gray);
+            animation: fadeUp 0.7s 0.55s ease both;
+        }
+        .compare-note strong { color: var(--navy); }
+
+        /* ── INFO STRIP ── */
         .info-strip {
             display: grid; grid-template-columns: 1fr 1fr 1fr;
             gap: 1px; background: var(--light-border);
             border: 1px solid var(--light-border); border-radius: 14px; overflow: hidden;
-            margin: 2rem 0; animation: fadeUp 0.7s 0.5s ease both;
+            margin: 1.8rem 0; animation: fadeUp 0.7s 0.5s ease both;
         }
-        .info-item { background: var(--white); padding: 1.2rem 1rem; text-align: center; }
-        .info-icon { font-size: 1.4rem; margin-bottom: 0.3rem; }
-        .info-title { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gray); font-weight: 600; }
-        .info-value { font-size: 0.88rem; font-weight: 600; color: var(--navy); margin-top: 0.1rem; }
+        .info-item { background: var(--white); padding: 1.1rem 1rem; text-align: center; }
+        .info-icon { font-size: 1.3rem; margin-bottom: 0.25rem; }
+        .info-title { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gray); font-weight: 600; }
+        .info-value { font-size: 0.85rem; font-weight: 600; color: var(--navy); margin-top: 0.1rem; }
 
-        /* CTA */
+        /* ── CTA ── */
         .cta-wrap { text-align: center; animation: fadeUp 0.7s 0.6s ease both; }
         .btn {
             display: inline-flex; align-items: center; gap: 0.6rem;
@@ -164,26 +225,24 @@
         }
         .btn:hover { background: var(--gold); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(201,151,43,0.35); }
         .btn svg { width: 18px; height: 18px; fill: currentColor; }
-        .cta-note { margin-top: 1rem; font-size: 0.82rem; color: var(--gray); }
+        .cta-note { margin-top: 0.9rem; font-size: 0.82rem; color: var(--gray); }
 
-        /* FOOTER */
+        /* ── FOOTER ── */
         footer { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--light-border); text-align: center; animation: fadeUp 0.7s 0.7s ease both; }
-        .footer-address { font-size: 0.9rem; color: var(--gray); line-height: 1.8; }
+        .footer-address { font-size: 0.88rem; color: var(--gray); line-height: 1.8; }
         .footer-address strong { color: var(--navy); font-weight: 600; }
 
-        /* MODAL */
+        /* ── MODAL ── */
         .modal-overlay {
             display: none; position: fixed; inset: 0;
-            background: rgba(15,31,61,0.55);
-            backdrop-filter: blur(4px);
+            background: rgba(15,31,61,0.55); backdrop-filter: blur(4px);
             z-index: 100; align-items: center; justify-content: center; padding: 1.5rem;
         }
         .modal-overlay.open { display: flex; }
         .modal {
             background: var(--white); border-radius: 24px;
-            padding: 2.5rem 2rem; width: 100%; max-width: 440px;
-            box-shadow: 0 24px 64px rgba(15,31,61,0.22);
-            position: relative;
+            padding: 2.5rem 2rem; width: 100%; max-width: 430px;
+            box-shadow: 0 24px 64px rgba(15,31,61,0.22); position: relative;
             animation: modalIn 0.35s cubic-bezier(0.34,1.56,0.64,1) both;
         }
         @keyframes modalIn {
@@ -193,88 +252,85 @@
         .modal-close {
             position: absolute; top: 1.1rem; right: 1.2rem;
             background: none; border: none; font-size: 1.5rem;
-            cursor: pointer; color: var(--gray); line-height: 1; transition: color 0.15s;
+            cursor: pointer; color: var(--gray); transition: color 0.15s;
         }
         .modal-close:hover { color: var(--navy); }
-
-        .modal-rate-chip {
-            display: inline-block;
-            background: var(--cream); border: 1px solid var(--light-border);
-            color: var(--navy); font-size: 0.78rem; font-weight: 700;
-            letter-spacing: 0.08em; text-transform: uppercase;
-            padding: 0.3rem 0.9rem; border-radius: 50px; margin-bottom: 1rem;
+        .modal-chip {
+            display: inline-block; padding: 0.28rem 0.9rem; border-radius: 50px;
+            font-size: 0.75rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+            margin-bottom: 1rem; color: white;
         }
-        .modal h2 { font-family: 'Playfair Display', serif; font-size: 1.7rem; font-weight: 700; margin-bottom: 0.35rem; }
-        .modal-sub { font-size: 0.88rem; color: var(--gray); margin-bottom: 1.6rem; }
+        .modal-chip.chip-king { background: var(--navy); }
+        .modal-chip.chip-double { background: var(--double-accent); }
+        .modal h2 { font-family: 'Playfair Display', serif; font-size: 1.65rem; font-weight: 700; margin-bottom: 0.3rem; }
+        .modal-sub { font-size: 0.87rem; color: var(--gray); margin-bottom: 1.5rem; }
 
-        .form-group { margin-bottom: 1.1rem; }
+        .form-group { margin-bottom: 1rem; }
         .form-group label {
-            display: block; font-size: 0.78rem; font-weight: 600;
+            display: block; font-size: 0.75rem; font-weight: 600;
             letter-spacing: 0.06em; text-transform: uppercase; color: var(--gray); margin-bottom: 0.4rem;
         }
         .form-group input {
-            width: 100%; padding: 0.85rem 1rem;
+            width: 100%; padding: 0.82rem 1rem;
             border: 1.5px solid var(--light-border); border-radius: 10px;
-            font-size: 1rem; font-family: 'DM Sans', sans-serif;
-            color: var(--navy); background: var(--cream);
-            outline: none; transition: border-color 0.2s, box-shadow 0.2s;
+            font-size: 0.97rem; font-family: 'DM Sans', sans-serif;
+            color: var(--navy); background: var(--cream); outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s;
         }
         .form-group input:focus { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(201,151,43,0.15); }
         .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
 
         .btn-submit {
-            width: 100%; margin-top: 0.5rem; padding: 1rem;
-            background: var(--navy); color: white; border: none; border-radius: 50px;
-            font-size: 1rem; font-weight: 700; font-family: 'DM Sans', sans-serif;
+            width: 100%; margin-top: 0.6rem; padding: 1rem;
+            color: white; border: none; border-radius: 50px;
+            font-size: 0.97rem; font-weight: 700; font-family: 'DM Sans', sans-serif;
             cursor: pointer; transition: all 0.25s ease;
-            box-shadow: 0 4px 16px rgba(15,31,61,0.2);
+            box-shadow: 0 4px 16px rgba(15,31,61,0.18);
         }
-        .btn-submit:hover { background: var(--gold); transform: translateY(-1px); box-shadow: 0 8px 24px rgba(201,151,43,0.3); }
+        .btn-submit.btn-king { background: var(--navy); }
+        .btn-submit.btn-king:hover { background: var(--gold); }
+        .btn-submit.btn-double { background: var(--double-accent); }
+        .btn-submit.btn-double:hover { background: #1e4f68; }
 
-        /* CONFIRMATION */
+        /* ── CONFIRMATION ── */
         .confirm-screen { display: none; text-align: center; padding: 0.5rem 0; }
         .confirm-screen.show { display: block; }
         .form-section.hide { display: none; }
-
         .check-circle {
             width: 72px; height: 72px; background: #d4edda; border-radius: 50%;
-            margin: 0 auto 1.2rem;
-            display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 1.2rem; display: flex; align-items: center; justify-content: center;
             animation: popIn 0.5s cubic-bezier(0.34,1.56,0.64,1) both;
         }
-        @keyframes popIn {
-            from { transform: scale(0); opacity: 0; }
-            to   { transform: scale(1); opacity: 1; }
-        }
+        @keyframes popIn { from{transform:scale(0);opacity:0} to{transform:scale(1);opacity:1} }
         .check-circle svg { width: 36px; height: 36px; }
         .confirm-title { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 900; margin-bottom: 0.5rem; }
-        .confirm-sub { font-size: 0.93rem; color: var(--gray); line-height: 1.6; margin-bottom: 1.5rem; }
+        .confirm-sub { font-size: 0.9rem; color: var(--gray); line-height: 1.6; margin-bottom: 1.4rem; }
         .confirm-details {
             background: var(--cream); border: 1px solid var(--light-border);
-            border-radius: 12px; padding: 1rem 1.2rem; margin-bottom: 1.5rem; text-align: left;
+            border-radius: 12px; padding: 1rem 1.2rem; margin-bottom: 1.4rem; text-align: left;
         }
-        .cd-row { display: flex; justify-content: space-between; font-size: 0.88rem; padding: 0.3rem 0; }
+        .cd-row { display: flex; justify-content: space-between; font-size: 0.86rem; padding: 0.28rem 0; }
         .cd-row span:first-child { color: var(--gray); }
         .cd-row span:last-child { font-weight: 600; color: var(--navy); }
         .btn-done {
-            display: inline-block; padding: 0.85rem 2rem;
+            display: inline-block; padding: 0.82rem 2rem;
             background: var(--navy); color: white; border: none; border-radius: 50px;
-            font-size: 0.95rem; font-weight: 700; font-family: 'DM Sans', sans-serif;
+            font-size: 0.93rem; font-weight: 700; font-family: 'DM Sans', sans-serif;
             cursor: pointer; transition: all 0.2s;
         }
         .btn-done:hover { background: var(--gold); transform: translateY(-1px); }
 
-        /* ANIMATIONS */
-        @keyframes fadeDown { from { opacity: 0; transform: translateY(-16px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes fadeUp   { from { opacity: 0; transform: translateY(16px);  } to { opacity: 1; transform: translateY(0); } }
+        /* ── ANIMATIONS ── */
+        @keyframes fadeDown { from{opacity:0;transform:translateY(-16px)} to{opacity:1;transform:translateY(0)} }
+        @keyframes fadeUp   { from{opacity:0;transform:translateY(16px)}  to{opacity:1;transform:translateY(0)} }
     </style>
 </head>
 <body>
-
 <div class="wrapper">
+
     <header>
         <div class="logo-mark"></div>
-        <h1>Simple Stay</h1>
+        <h1>Simple Stay At Millbury Motel</h1>
         <p class="tagline">Clean · Quiet · Affordable</p>
     </header>
 
@@ -284,50 +340,129 @@
         <span class="status-badge"><span class="dot"></span>Rooms Available Now — Walk-ins Welcome</span>
     </div>
 
-    <div class="rates-grid">
-
-        <div class="rate-card featured" onclick="openModal('Nightly', '$39.99 + tax')">
-            <div class="rate-left">
-                <div class="rate-label">Per Night</div>
-                <div class="rate-name">Nightly Rate</div>
-                <div class="rate-sub">Check in at the front desk, 24/7</div>
-            </div>
-            <div class="rate-right">
-                <div class="rate-amount"><sup>$</sup>39.99</div>
-                <div class="rate-tax">+ applicable tax</div>
-            </div>
-            <span class="select-hint">Tap to Reserve →</span>
-        </div>
-
-        <div class="rate-card" onclick="openModal('Weekly', '$280 + tax')">
-            <div class="rate-left">
-                <div class="rate-label">Per Week</div>
-                <div class="rate-name">Weekly Rate</div>
-                <div class="rate-sub">7 consecutive nights</div>
-            </div>
-            <div class="rate-right">
-                <div class="rate-amount"><sup>$</sup>280</div>
-                <div class="rate-tax">+ applicable tax</div>
-            </div>
-            <span class="select-hint">Tap to Reserve →</span>
-        </div>
-
-        <div class="rate-card" onclick="openModal('Monthly', '$999 + tax')">
-            <span class="best-value-badge">Best Value</span>
-            <div class="rate-left">
-                <div class="rate-label">Per Month</div>
-                <div class="rate-name">Monthly Rate</div>
-                <div class="rate-sub">Extended stay pricing</div>
-            </div>
-            <div class="rate-right">
-                <div class="rate-amount"><sup>$</sup>999</div>
-                <div class="rate-tax">+ applicable tax</div>
-            </div>
-            <span class="select-hint">Tap to Reserve →</span>
-        </div>
-
+    <!-- ROOM TYPE TABS -->
+    <div class="room-tabs">
+        <button class="tab-btn active-king" id="tabKing" onclick="switchRoom('king')">
+            <span class="bed-icon">🛏</span>
+            <span class="tab-label">King Room<small>1 King Bed</small></span>
+        </button>
+        <button class="tab-btn" id="tabDouble" onclick="switchRoom('double')">
+            <span class="bed-icon">🛏🛏</span>
+            <span class="tab-label">Double Room<small>2 Double Beds</small></span>
+        </button>
     </div>
 
+    <!-- KING PANEL -->
+    <div class="room-panel king-panel active" id="panelKing">
+        <div class="room-header king-header">
+            <div class="room-header-left">
+                <div class="room-type-label">Room Type</div>
+                <div class="room-type-name">King Bed Room</div>
+                <div class="room-type-desc">Spacious room with one king-sized bed</div>
+            </div>
+            <div class="room-icon-big">👑</div>
+        </div>
+
+        <div class="rates-grid">
+            <div class="rate-card" onclick="openModal('King · Nightly', '$39.99 + tax', 'king')">
+                <div class="rate-left">
+                    <div class="rate-period">Per Night</div>
+                    <div class="rate-name">Nightly Rate</div>
+                    <div class="rate-sub">Check in at the front desk, 24/7</div>
+                </div>
+                <div class="rate-right">
+                    <div class="rate-amount"><sup>$</sup>39.99</div>
+                    <div class="rate-tax">+ applicable tax</div>
+                </div>
+                <span class="select-hint">Tap to Reserve →</span>
+            </div>
+
+            <div class="rate-card" onclick="openModal('King · Weekly', '$280 + tax', 'king')">
+                <div class="rate-left">
+                    <div class="rate-period">Per Week</div>
+                    <div class="rate-name">Weekly Rate</div>
+                    <div class="rate-sub">7 consecutive nights</div>
+                </div>
+                <div class="rate-right">
+                    <div class="rate-amount"><sup>$</sup>280</div>
+                    <div class="rate-tax">+ applicable tax</div>
+                </div>
+                <span class="select-hint">Tap to Reserve →</span>
+            </div>
+
+            <div class="rate-card" onclick="openModal('King · Monthly', '$999 + tax', 'king')">
+                <span class="best-value-badge">Best Value</span>
+                <div class="rate-left">
+                    <div class="rate-period">Per Month</div>
+                    <div class="rate-name">Monthly Rate</div>
+                    <div class="rate-sub">Extended stay pricing</div>
+                </div>
+                <div class="rate-right">
+                    <div class="rate-amount"><sup>$</sup>999</div>
+                    <div class="rate-tax">+ applicable tax</div>
+                </div>
+                <span class="select-hint">Tap to Reserve →</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- DOUBLE PANEL -->
+    <div class="room-panel double-panel" id="panelDouble">
+        <div class="room-header double-header">
+            <div class="room-header-left">
+                <div class="room-type-label">Room Type</div>
+                <div class="room-type-name">Double Bed Room</div>
+                <div class="room-type-desc">Room with two double beds — great for groups</div>
+            </div>
+            <div class="room-icon-big">🏨</div>
+        </div>
+
+        <div class="rates-grid">
+            <div class="rate-card" onclick="openModal('Double · Nightly', '$49.99 + tax', 'double')">
+                <div class="rate-left">
+                    <div class="rate-period">Per Night</div>
+                    <div class="rate-name">Nightly Rate</div>
+                    <div class="rate-sub">Check in at the front desk, 24/7</div>
+                </div>
+                <div class="rate-right">
+                    <div class="rate-amount"><sup>$</sup>49.99</div>
+                    <div class="rate-tax">+ applicable tax</div>
+                </div>
+                <span class="select-hint">Tap to Reserve →</span>
+            </div>
+
+            <div class="rate-card" onclick="openModal('Double · Weekly', '$350 + tax', 'double')">
+                <div class="rate-left">
+                    <div class="rate-period">Per Week</div>
+                    <div class="rate-name">Weekly Rate</div>
+                    <div class="rate-sub">7 consecutive nights</div>
+                </div>
+                <div class="rate-right">
+                    <div class="rate-amount"><sup>$</sup>350</div>
+                    <div class="rate-tax">+ applicable tax</div>
+                </div>
+                <span class="select-hint">Tap to Reserve →</span>
+            </div>
+
+            <div class="rate-card" onclick="openModal('Double · Monthly', '$1,200 + tax', 'double')">
+                <span class="best-value-badge">Best Value</span>
+                <div class="rate-left">
+                    <div class="rate-period">Per Month</div>
+                    <div class="rate-name">Monthly Rate</div>
+                    <div class="rate-sub">Extended stay pricing</div>
+                </div>
+                <div class="rate-right">
+                    <div class="rate-amount"><sup>$</sup>1,200</div>
+                    <div class="rate-tax">+ applicable tax</div>
+                </div>
+                <span class="select-hint">Tap to Reserve →</span>
+            </div>
+        </div>
+    </div>
+
+    <p class="compare-note">Tap a rate card above to reserve your room. <strong>No payment needed online</strong> — pay at the desk.</p>
+
+    <!-- INFO STRIP -->
     <div class="info-strip">
         <div class="info-item">
             <div class="info-icon">🕐</div>
@@ -370,9 +505,9 @@
 
         <!-- FORM -->
         <div class="form-section" id="formSection">
-            <div class="modal-rate-chip" id="rateChip"></div>
+            <div class="modal-chip" id="modalChip"></div>
             <h2>Reserve Your Room</h2>
-            <p class="modal-sub">Just a few quick details and you're set. Show up at the front desk whenever you're ready.</p>
+            <p class="modal-sub">Just a few quick details and you're all set. Pay at the front desk when you arrive.</p>
 
             <div class="form-row">
                 <div class="form-group">
@@ -389,7 +524,7 @@
                 <input type="tel" id="phone" placeholder="(419) 555-0123" autocomplete="tel">
             </div>
 
-            <button class="btn-submit" onclick="submitForm()">Confirm Reservation</button>
+            <button class="btn-submit" id="btnSubmit" onclick="submitForm()">Confirm Reservation</button>
         </div>
 
         <!-- CONFIRMATION -->
@@ -400,33 +535,59 @@
                 </svg>
             </div>
             <div class="confirm-title">You're All Set!</div>
-            <p class="confirm-sub">Your reservation is noted. Just walk in and check in at the front desk — we'll be expecting you.</p>
-
+            <p class="confirm-sub">Your reservation is noted. Just walk in and check in at the front desk — we'll be ready for you.</p>
             <div class="confirm-details">
                 <div class="cd-row"><span>Name</span><span id="confirmName">—</span></div>
-                <div class="cd-row"><span>Rate</span><span id="confirmRate">—</span></div>
+                <div class="cd-row"><span>Room & Rate</span><span id="confirmRate">—</span></div>
                 <div class="cd-row"><span>Check-In</span><span>Walk-in · 24/7</span></div>
                 <div class="cd-row"><span>Address</span><span>3491 Latcha Rd.</span></div>
             </div>
-
             <button class="btn-done" onclick="closeModal()">Done</button>
         </div>
     </div>
 </div>
 
 <script>
-    let selectedRate = '';
-    let selectedPrice = '';
+    let selectedRate = '', selectedType = '';
 
-    function openModal(rate, price) {
-        selectedRate = rate;
-        selectedPrice = price;
-        document.getElementById('rateChip').textContent = rate + ' Rate — ' + price;
+    function switchRoom(type) {
+        const tabKing   = document.getElementById('tabKing');
+        const tabDouble = document.getElementById('tabDouble');
+        const panelKing = document.getElementById('panelKing');
+        const panelDouble = document.getElementById('panelDouble');
+
+        if (type === 'king') {
+            tabKing.className   = 'tab-btn active-king';
+            tabDouble.className = 'tab-btn';
+            panelKing.classList.add('active');
+            panelDouble.classList.remove('active');
+        } else {
+            tabDouble.className = 'tab-btn active-double';
+            tabKing.className   = 'tab-btn';
+            panelDouble.classList.add('active');
+            panelKing.classList.remove('active');
+        }
+    }
+
+    function openModal(rate, price, type) {
+        selectedRate = rate + ' — ' + price;
+        selectedType = type;
+
+        const chip = document.getElementById('modalChip');
+        chip.textContent = rate;
+        chip.className = 'modal-chip chip-' + type;
+
+        const btn = document.getElementById('btnSubmit');
+        btn.className = 'btn-submit btn-' + type;
+
         document.getElementById('formSection').classList.remove('hide');
         document.getElementById('confirmScreen').classList.remove('show');
         document.getElementById('firstName').value = '';
-        document.getElementById('lastName').value = '';
-        document.getElementById('phone').value = '';
+        document.getElementById('lastName').value  = '';
+        document.getElementById('phone').value     = '';
+        document.getElementById('firstName').style.borderColor = '';
+        document.getElementById('lastName').style.borderColor  = '';
+
         document.getElementById('modalOverlay').classList.add('open');
         document.body.style.overflow = 'hidden';
         setTimeout(() => document.getElementById('firstName').focus(), 350);
@@ -444,19 +605,17 @@
     function submitForm() {
         const first = document.getElementById('firstName').value.trim();
         const last  = document.getElementById('lastName').value.trim();
-        if (!first || !last) {
-            document.getElementById('firstName').style.borderColor = first ? '' : '#e63946';
-            document.getElementById('lastName').style.borderColor  = last  ? '' : '#e63946';
-            return;
-        }
+        document.getElementById('firstName').style.borderColor = first ? '' : '#e63946';
+        document.getElementById('lastName').style.borderColor  = last  ? '' : '#e63946';
+        if (!first || !last) return;
+
         document.getElementById('confirmName').textContent = first + ' ' + last;
-        document.getElementById('confirmRate').textContent = selectedRate + ' — ' + selectedPrice;
+        document.getElementById('confirmRate').textContent = selectedRate;
         document.getElementById('formSection').classList.add('hide');
         document.getElementById('confirmScreen').classList.add('show');
     }
 
     document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 </script>
-
 </body>
 </html>
